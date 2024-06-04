@@ -8,7 +8,6 @@ from mmengine.model import BaseModel
 
 ImageType = Union[str, np.ndarray, Sequence[str], Sequence[np.ndarray]]
 
-
 def _preprare_data(imgs: ImageType, model: BaseModel):
 
     cfg = model.cfg

@@ -160,20 +160,25 @@ def show_result_pyplot(model: BaseSegmentor,
     """
     if hasattr(model, 'module'):
         model = model.module
+
     if isinstance(img, str):
         image = mmcv.imread(img, channel_order='rgb')
     else:
         image = img
+
     if save_dir is not None:
         mkdir_or_exist(save_dir)
+
     # init visualizer
     visualizer = SegLocalVisualizer(
         vis_backends=[dict(type='LocalVisBackend')],
         save_dir=save_dir,
         alpha=opacity)
+    
     visualizer.dataset_meta = dict(
         classes=model.dataset_meta['classes'],
         palette=model.dataset_meta['palette'])
+    
     visualizer.add_datasample(
         name=title,
         image=image,
@@ -184,6 +189,7 @@ def show_result_pyplot(model: BaseSegmentor,
         out_file=out_file,
         show=show,
         with_labels=with_labels)
+    
     vis_img = visualizer.get_image()
 
     return vis_img
